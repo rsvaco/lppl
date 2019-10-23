@@ -1,4 +1,6 @@
 /*****************************************************************************/
+/**  Ejemplo de BISON-I: S E M - 2          2019-2020 <jbenedi@dsic.upv.es> **/
+/*****************************************************************************/
 %{
 #include <stdio.h>
 #include <string.h>
@@ -20,7 +22,6 @@ digito          [0-9]
 letra           [a-zA-Z]
 entero          {digito}+
 comentario      \/\/.*"\n"
-
 id              {letra}{{letra}|{digito}|_}*
 
 
@@ -38,16 +39,42 @@ id              {letra}{{letra}|{digito}|_}*
 "bool"          { retornar(BOOL_); }
 
 
-{delimitador}   { if (verbosidad) ECHO; }
+
 "+"             { retornar (MAS_);   }
 "-"             { retornar (MENOS_); }
 "*"             { retornar (POR_);   }
 "/"             { retornar (DIV_);   }
-"("             { retornar (PARA_);  }
-")"             { retornar (PARC_);   }
 "="             { retornar(IGUAL_); }
 "+="            { retornar(MASIGUAL_); }
 "-="            { retornar(MENOSIGUAL_); }
+"*="            { retornar(PORIGUAL_); }
+"/="            { retornar(DIVIGUAL_); }
+"&&"            { retornar(AND_); }
+"||"            { retornar(OR_); }
+"=="            { retornar(IGUALIGUAL_); }
+"!="            { retornar(DIFERENTE_); }
+">"             { retornar(MAYORQUE_); }
+"<"             { retornar(MENORQUE_); }
+">="            { retornar(MAYORIGUAL_); }
+"<="            { retornar(MENORIGUAL_); }
+
+"%"             { retornar(MOD_); }
+"++"            { retornar(MASMAS_); }
+"--"            { retornar(MENOSMENOS_); }
+"{"             { retornar(LLAVE1_); }
+"}"             { retornar(LLAVE2_); }
+"["             { retornar(CORCHETE1_); }
+"]"             { retornar(CORCHETE2_); }
+"("             { retornar(PARENTESIS1_); }
+")"             { retornar(PARENTESIS2_); }
+";"             { retornar(PUNTOCOMA_); }
+                
+{entero}        { retornar (CTE_);   }
+{id}            { retornar(ID_); }
+{delimitador}   { if (verbosidad) ECHO; }
+{comentario}    { if (verbosidad) ECHO; }
+.               { yyerror("Caracter desconocido"); }
+%%
 "*="            { retornar(PORIGUAL_); }
 "/="            { retornar(DIVIGUAL_); }
 "&&"            { retornar(AND_); }
