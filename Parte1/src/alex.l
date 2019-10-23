@@ -37,7 +37,7 @@ id              {letra}{{letra}|{digito}|_}*
 "print"         { retornar(PRINT_); }
 "int"           { retornar(INT_); }
 "bool"          { retornar(BOOL_); }
-
+"struct"	{ retornar(STRUCT_); }
 
 
 "+"             { retornar (MAS_);   }
@@ -48,6 +48,33 @@ id              {letra}{{letra}|{digito}|_}*
 "+="            { retornar(MASIGUAL_); }
 "-="            { retornar(MENOSIGUAL_); }
 "*="            { retornar(PORIGUAL_); }
+"/="            { retornar(DIVIGUAL_); }
+"&&"            { retornar(AND_); }
+"||"            { retornar(OR_); }
+"=="            { retornar(IGUALIGUAL_); }
+"!="            { retornar(DIFERENTE_); }
+">"             { retornar(MAYORQUE_); }
+"<"             { retornar(MENORQUE_); }
+">="            { retornar(MAYORIGUAL_); }
+"<="            { retornar(MENORIGUAL_); }
+
+"%"             { retornar(MOD_); }
+"++"            { retornar(MASMAS_); }
+"--"            { retornar(MENOSMENOS_); }
+"{"             { retornar(LLAVE1_); }
+"}"             { retornar(LLAVE2_); }
+"["             { retornar(CORCHETE1_); }
+"]"             { retornar(CORCHETE2_); }
+"("             { retornar(PARENTESIS1_); }
+")"             { retornar(PARENTESIS2_); }
+";"             { retornar(PUNTOCOMA_); }
+                
+{entero}        { retornar (CTE_);   }
+{id}            { retornar(ID_); }
+{delimitador}   { if (verbosidad) ECHO; }
+{comentario}    { if (verbosidad) ECHO; }
+.               { yyerror("Caracter desconocido"); }
+%%
 "/="            { retornar(DIVIGUAL_); }
 "&&"            { retornar(AND_); }
 "||"            { retornar(OR_); }
